@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Physics Lab | Planck's Constant Experiment</title>
-    <meta name="description" content="Interactive experiment for determining Planck's constant using LEDs">
+    <title>Physics Lab | LED Characteristics Experiment</title>
+    <meta name="description" content="Interactive experiment for studying LED characteristics">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
+   <style>
         :root {
             --primary: #4361ee;
             --secondary: #3f37c9;
@@ -658,8 +658,8 @@
     <!-- Hero Section -->
     <header class="hero">
         <div class="hero-content container">
-            <h1 data-aos="fade-up">Planck's Constant Experiment</h1>
-            <p data-aos="fade-up" data-aos-delay="100">Determining Planck's constant using LEDs of different colors</p>
+            <h1 data-aos="fade-up">LED Characteristics Experiment</h1>
+            <p data-aos="fade-up" data-aos-delay="100">Studying the voltage-current characteristics of a Light Emitting Diode</p>
             <div data-aos="fade-up" data-aos-delay="200">
                 <a href="#experiment" class="btn btn-primary"><i class="fas fa-flask"></i> Start Experiment</a>
                 <a href="#theory" class="btn btn-outline"><i class="fas fa-book"></i> Learn Theory</a>
@@ -675,7 +675,7 @@
                 <i class="fas fa-bullseye"></i>
                 <h2>Objective</h2>
             </div>
-            <p>To determine Planck's constant by measuring the threshold voltage of LEDs of different colors and analyzing the relationship between voltage and wavelength.</p>
+            <p>To study the voltage-current characteristics of a Light Emitting Diode (LED) and observe its behavior under forward bias conditions.</p>
         </section>
 
         <!-- Apparatus Section -->
@@ -687,7 +687,7 @@
             <div class="grid-container">
                 <div class="apparatus-item" data-aos="zoom-in" data-aos-delay="100">
                     <i class="fas fa-lightbulb"></i>
-                    <h3>LEDs of different colors</h3>
+                    <h3>LED</h3>
                 </div>
                 <div class="apparatus-item" data-aos="zoom-in" data-aos-delay="200">
                     <i class="fas fa-bolt"></i>
@@ -695,11 +695,11 @@
                 </div>
                 <div class="apparatus-item" data-aos="zoom-in" data-aos-delay="300">
                     <i class="fas fa-tachometer-alt"></i>
-                    <h3>Voltmeter (0-20V)</h3>
+                    <h3>Voltmeter</h3>
                 </div>
                 <div class="apparatus-item" data-aos="zoom-in" data-aos-delay="400">
                     <i class="fas fa-microchip"></i>
-                    <h3>Ammeter (0-200mA)</h3>
+                    <h3>Ammeter</h3>
                 </div>
                 <div class="apparatus-item" data-aos="zoom-in" data-aos-delay="500">
                     <i class="fas fa-plug"></i>
@@ -707,7 +707,7 @@
                 </div>
                 <div class="apparatus-item" data-aos="zoom-in" data-aos-delay="600">
                     <i class="fas fa-box"></i>
-                    <h3>Planck's Constant Setup</h3>
+                    <h3>Trainer Board</h3>
                 </div>
             </div>
         </section>
@@ -719,14 +719,20 @@
                 <h2>Theory</h2>
             </div>
             <div class="theory-content">
-                <p>Planck's constant (h) is a fundamental physical constant that relates the energy of a photon to its frequency. The energy (E) of a photon is given by:</p>
-                <p style="text-align: center; font-size: 1.2rem; margin: 15px 0;">E = hν = hc/λ</p>
-                <p>where ν is the frequency, c is the speed of light, and λ is the wavelength of the photon.</p>
-                <p>In an LED, when electrons recombine with holes across the band gap, they emit photons with energy approximately equal to the band gap energy (Eg). The threshold voltage (Vth) at which an LED starts emitting light is related to the band gap energy by:</p>
-                <p style="text-align: center; font-size: 1.2rem; margin: 15px 0;">Eg ≈ eVth</p>
-                <p>where e is the electronic charge. Combining these equations, we get:</p>
-                <p style="text-align: center; font-size: 1.2rem; margin: 15px 0;">eVth ≈ hc/λ</p>
-                <p>By measuring the threshold voltage for LEDs of different wavelengths, we can determine Planck's constant from the slope of a plot of Vth versus 1/λ.</p>
+                <p>The light emitting diode (LED) is a solid state source. LEDs have replaced incandescent lamps in many applications because they have the following advantages:</p>
+                <ul>
+                    <li>Low voltage operation</li>
+                    <li>Long life (more than two years)</li>
+                    <li>Fast ON-OFF switching (nanoseconds)</li>
+                </ul>
+                
+                <p>In a forward biased rectifier diode, free electrons and holes recombine at a junction. When a free electron falls into a hole, it drops from a higher energy level to lower energy level. As the electron falls it radiates energy in the form of heat and light. Because silicon is opaque (not transparent), none of the light escapes to the environment.</p>
+                
+                <p>An LED is different - semi-transparent materials are used instead of silicon. In forward-biased LED, heat and light are again radiated when free electrons and holes recombine at the junction. Because the material is semi-transparent, some of the light escapes to the surroundings.</p>
+                
+                <p>By using elements like gallium, arsenic and phosphorus, manufacturers can produce LEDs that radiate red, green, yellow, amber or infrared (invisible) light. LEDs that produce visible radiations are used in instrument displays like calculators, digital clocks, etc. The infrared LED finds applications in burglar-alarm systems and other areas requiring invisible radiations.</p>
+                
+                <p>LEDs have a typical voltage drop from 1.5V to 2.5V for currents between 10mA to 50mA. Incidentally, LED has low reverse voltage rating of 3V. This means accidentally applying a reverse voltage greater than 3V may destroy or damage the LED characteristics.</p>
             </div>
         </section>
 
@@ -737,8 +743,8 @@
                 <h2>Circuit Diagram</h2>
             </div>
             <div class="circuit-diagram">
-                <img src="https://www.researchgate.net/publication/334386878/figure/fig1/AS:779951922012160@1562869323800/Schematic-diagram-of-the-LED-circuit.png" alt="LED Circuit Diagram">
-                <p class="caption">Fig 1: Circuit diagram for Planck's constant experiment using LED</p>
+                <img src="https://www.electronics-tutorials.ws/wp-content/uploads/2018/05/diodes-dio8.gif" alt="LED Circuit Diagram">
+                <p class="caption">Fig 1: Circuit diagram for LED characteristics experiment</p>
             </div>
         </section>
 
@@ -749,15 +755,12 @@
                 <h2>Procedure</h2>
             </div>
             <ol class="procedure-steps">
-                <li>Set up the circuit as shown in the diagram, connecting the power supply, voltmeter, ammeter, and LED.</li>
-                <li>Start with the red LED and set the voltmeter to the 20V range and ammeter to the 200mA range.</li>
-                <li>Switch on the power supply and gradually increase the voltage in steps of 0.1V.</li>
-                <li>Observe the ammeter reading. When the LED just starts to glow, note the voltage (threshold voltage).</li>
-                <li>Record the corresponding current reading.</li>
-                <li>Repeat the procedure for LEDs of different colors (blue, green, yellow, orange).</li>
-                <li>Tabulate the readings of threshold voltage versus wavelength for each LED.</li>
-                <li>Plot a graph of threshold voltage (Vth) versus the reciprocal of wavelength (1/λ).</li>
-                <li>Determine Planck's constant from the slope of the graph using the relation h = (slope × e)/c.</li>
+                <li>Connect the circuit as shown in the circuit diagram through patch chords.</li>
+                <li>Switch ON the instrument using ON/OFF toggle switch provided on the front panel.</li>
+                <li>Vary the input voltage in small steps and note down the voltage and current readings.</li>
+                <li>Record at least 10 readings of voltage and corresponding current.</li>
+                <li>Plot a graph of LED current versus LED voltage.</li>
+                <li>Observe the characteristics curve and note the threshold voltage where current starts increasing rapidly.</li>
             </ol>
         </section>
 
@@ -768,45 +771,67 @@
                 <h2>Observations</h2>
             </div>
             
+            <p><strong>Least count of voltmeter:</strong> <input type="text" class="reading-input" placeholder="Enter value in V" style="width: 100px; display: inline;"></p>
+            <p><strong>Least count of ammeter:</strong> <input type="text" class="reading-input" placeholder="Enter value in mA" style="width: 100px; display: inline;"></p>
+            
             <table class="reading-table">
                 <thead>
                     <tr>
-                        <th>Color</th>
-                        <th>Wavelength (nm)</th>
-                        <th>Threshold Voltage (V)</th>
-                        <th>Current (mA)</th>
+                        <th>S.No.</th>
+                        <th>LED Voltage (V)</th>
+                        <th>LED Current (mA)</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Red</td>
-                        <td><input type="number" class="reading-input" placeholder="700"></td>
-                        <td><input type="number" step="0.01" class="reading-input" placeholder="1.8"></td>
-                        <td><input type="number" step="0.01" class="reading-input" placeholder="5.0"></td>
+                        <td>1</td>
+                        <td><input type="number" step="0.01" class="reading-input"></td>
+                        <td><input type="number" step="0.01" class="reading-input"></td>
                     </tr>
                     <tr>
-                        <td>Orange</td>
-                        <td><input type="number" class="reading-input" placeholder="620"></td>
-                        <td><input type="number" step="0.01" class="reading-input" placeholder="2.0"></td>
-                        <td><input type="number" step="0.01" class="reading-input" placeholder="5.2"></td>
+                        <td>2</td>
+                        <td><input type="number" step="0.01" class="reading-input"></td>
+                        <td><input type="number" step="0.01" class="reading-input"></td>
                     </tr>
                     <tr>
-                        <td>Yellow</td>
-                        <td><input type="number" class="reading-input" placeholder="590"></td>
-                        <td><input type="number" step="0.01" class="reading-input" placeholder="2.1"></td>
-                        <td><input type="number" step="0.01" class="reading-input" placeholder="5.5"></td>
+                        <td>3</td>
+                        <td><input type="number" step="0.01" class="reading-input"></td>
+                        <td><input type="number" step="0.01" class="reading-input"></td>
                     </tr>
                     <tr>
-                        <td>Green</td>
-                        <td><input type="number" class="reading-input" placeholder="550"></td>
-                        <td><input type="number" step="0.01" class="reading-input" placeholder="2.3"></td>
-                        <td><input type="number" step="0.01" class="reading-input" placeholder="6.0"></td>
+                        <td>4</td>
+                        <td><input type="number" step="0.01" class="reading-input"></td>
+                        <td><input type="number" step="0.01" class="reading-input"></td>
                     </tr>
                     <tr>
-                        <td>Blue</td>
-                        <td><input type="number" class="reading-input" placeholder="470"></td>
-                        <td><input type="number" step="0.01" class="reading-input" placeholder="2.8"></td>
-                        <td><input type="number" step="0.01" class="reading-input" placeholder="7.5"></td>
+                        <td>5</td>
+                        <td><input type="number" step="0.01" class="reading-input"></td>
+                        <td><input type="number" step="0.01" class="reading-input"></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td><input type="number" step="0.01" class="reading-input"></td>
+                        <td><input type="number" step="0.01" class="reading-input"></td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td><input type="number" step="0.01" class="reading-input"></td>
+                        <td><input type="number" step="0.01" class="reading-input"></td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td><input type="number" step="0.01" class="reading-input"></td>
+                        <td><input type="number" step="0.01" class="reading-input"></td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td><input type="number" step="0.01" class="reading-input"></td>
+                        <td><input type="number" step="0.01" class="reading-input"></td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td><input type="number" step="0.01" class="reading-input"></td>
+                        <td><input type="number" step="0.01" class="reading-input"></td>
                     </tr>
                 </tbody>
             </table>
@@ -827,44 +852,49 @@
             
             <div class="graph-container">
                 <div class="graph-card">
-                    <h3>Vth vs 1/λ Plot</h3>
+                    <h3>LED I-V Characteristics</h3>
                     <div class="graph-wrapper">
                         <div class="graph-canvas-container">
                             <canvas id="resultsGraph"></canvas>
                         </div>
                     </div>
-                    <p class="caption">Fig 2: Graph of threshold voltage versus reciprocal of wavelength for determination of Planck's constant</p>
+                    <p class="caption">Fig 2: Graph of LED current versus voltage showing the characteristic curve</p>
                 </div>
             </div>
             
             <div class="results-grid">
                 <div class="result-card" data-aos="zoom-in" data-aos-delay="100">
                     <div class="result-icon">
-                        <i class="fas fa-ruler"></i>
+                        <i class="fas fa-bolt"></i>
                     </div>
                     <div class="result-content">
-                        <h4>Slope of Graph</h4>
-                        <p id="slope-value">--</p>
+                        <h4>Threshold Voltage</h4>
+                        <p id="threshold-value">--</p>
                     </div>
                 </div>
                 <div class="result-card" data-aos="zoom-in" data-aos-delay="200">
                     <div class="result-icon">
-                        <i class="fas fa-atom"></i>
+                        <i class="fas fa-tachometer-alt"></i>
                     </div>
                     <div class="result-content">
-                        <h4>Planck's Constant</h4>
-                        <p id="planck-value">--</p>
+                        <h4>Operating Voltage</h4>
+                        <p id="operating-value">--</p>
                     </div>
                 </div>
                 <div class="result-card" data-aos="zoom-in" data-aos-delay="300">
                     <div class="result-icon">
-                        <i class="fas fa-percentage"></i>
+                        <i class="fas fa-microchip"></i>
                     </div>
                     <div class="result-content">
-                        <h4>Percentage Error</h4>
-                        <p id="error-value">--</p>
+                        <h4>Operating Current</h4>
+                        <p id="current-value">--</p>
                     </div>
                 </div>
+            </div>
+            
+            <div class="result-section" style="margin-top: 30px;">
+                <h3>Result:</h3>
+                <p>The curve shows the desired characteristics of an LED, with a clear threshold voltage and exponential increase in current with voltage.</p>
             </div>
         </section>
 
@@ -875,11 +905,11 @@
                 <h2>Precautions</h2>
             </div>
             <ul class="precaution-list">
-                <li><i class="fas fa-check-circle"></i> Ensure all connections are tight and correct before switching on the power supply.</li>
-                <li><i class="fas fa-check-circle"></i> Increase the voltage very slowly near the threshold voltage to get an accurate reading.</li>
-                <li><i class="fas fa-check-circle"></i> Do not exceed the maximum current rating of the LEDs to prevent damage.</li>
-                <li><i class="fas fa-check-circle"></i> Take readings in a dimly lit room to clearly observe when the LED starts glowing.</li>
-                <li><i class="fas fa-check-circle"></i> Use fresh batteries or a stable power supply to ensure consistent voltage readings.</li>
+                <li><i class="fas fa-check-circle"></i> All connections should be tight and secure.</li>
+                <li><i class="fas fa-check-circle"></i> Readings should be noted very carefully.</li>
+                <li><i class="fas fa-check-circle"></i> Do not exceed the maximum current rating of the LED.</li>
+                <li><i class="fas fa-check-circle"></i> Increase the voltage gradually to avoid damaging the LED.</li>
+                <li><i class="fas fa-check-circle"></i> Ensure proper polarity when connecting the LED.</li>
             </ul>
         </section>
 
@@ -892,29 +922,37 @@
             
             <div class="accordion">
                 <div class="accordion-item">
-                    <button class="accordion-btn">What is the significance of Planck's constant?<i class="fas fa-chevron-down"></i></button>
+                    <button class="accordion-btn">What is LED?<i class="fas fa-chevron-down"></i></button>
                     <div class="accordion-content">
-                        <p>Planck's constant is a fundamental constant in quantum mechanics that relates the energy of a photon to its frequency. It sets the scale of quantum effects and appears in many fundamental equations of quantum theory.</p>
+                        <p>A Light Emitting Diode (LED) is a semiconductor device that emits light when an electric current passes through it. It works on the principle of electroluminescence where electron-hole recombination releases energy in the form of photons.</p>
                     </div>
                 </div>
                 
                 <div class="accordion-item">
-                    <button class="accordion-btn">Why do different colored LEDs have different threshold voltages?<i class="fas fa-chevron-down"></i></button>
+                    <button class="accordion-btn">How is an LED formed?<i class="fas fa-chevron-down"></i></button>
                     <div class="accordion-content">
-                        <p>Different colored LEDs emit light of different wavelengths, which corresponds to different photon energies. The threshold voltage is directly related to the energy band gap of the semiconductor material used in the LED, which determines the color of light emitted.</p>
+                        <p>An LED is formed by joining p-type and n-type semiconductor materials. When forward biased, electrons from the n-side and holes from the p-side recombine at the junction, releasing energy in the form of light.</p>
                     </div>
                 </div>
                 
                 <div class="accordion-item">
-                    <button class="accordion-btn">What are the sources of error in this experiment?<i class="fas fa-chevron-down"></i></button>
+                    <button class="accordion-btn">Why does an LED emit light of different colors?<i class="fas fa-chevron-down"></i></button>
                     <div class="accordion-content">
-                        <p>Possible sources of error include:</p>
-                        <ul>
-                            <li>Difficulty in precisely determining the exact threshold voltage when the LED just starts glowing</li>
-                            <li>Variation in LED characteristics due to manufacturing tolerances</li>
-                            <li>Temperature dependence of the LED characteristics</li>
-                            <li>Instrumental errors in voltage and current measurements</li>
-                        </ul>
+                        <p>Different colored LEDs are made using different semiconductor materials with varying band gaps. The color of light emitted depends on the energy band gap of the semiconductor material used in the LED.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <button class="accordion-btn">What is the difference between an LED and PN diode?<i class="fas fa-chevron-down"></i></button>
+                    <div class="accordion-content">
+                        <p>Key differences:
+                            <ul>
+                                <li>LED emits light when forward biased, while PN diode doesn't</li>
+                                <li>LED uses direct bandgap semiconductors, PN diode can use indirect bandgap</li>
+                                <li>LED has transparent packaging to let light escape</li>
+                                <li>LED has higher forward voltage drop than silicon PN diode</li>
+                            </ul>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -938,7 +976,7 @@
                 <div class="footer-section">
                     <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html">Submission</a></li>
                         <li><a href="experiment.html">Experiment</a></li>
                         <li><a href="#theory">Theory</a></li>
                         <li><a href="#viva">Viva Questions</a></li>
@@ -951,7 +989,6 @@
                         <li>Jane Smith</li>
                         <li>Robert Johnson</li>
                         <li>Emily Davis</li>
-                        <li>hello giraffe</li>
                     </ul>
                 </div>
             </div>
@@ -1013,173 +1050,132 @@
             // Get data from table
             const table = document.querySelector('.reading-table');
             const rows = table.querySelectorAll('tbody tr');
-            const data = [];
+            const voltages = [];
+            const currents = [];
             
             // Collect valid data points
             rows.forEach(row => {
-                const cells = row.querySelectorAll('td');
-                const color = cells[0].textContent.trim();
-                const wavelengthInput = cells[1].querySelector('input');
-                const voltageInput = cells[2].querySelector('input');
+                const voltageInput = row.querySelector('td:nth-child(2) input');
+                const currentInput = row.querySelector('td:nth-child(3) input');
                 
-                if (wavelengthInput && voltageInput) {
-            const wavelength = parseFloat(wavelengthInput.value);
-            const voltage = parseFloat(voltageInput.value);
+                if (voltageInput && currentInput) {
+                    const voltage = parseFloat(voltageInput.value);
+                    const current = parseFloat(currentInput.value);
+                    
+                    if (!isNaN(voltage) && !isNaN(current)) {
+                        voltages.push(voltage);
+                        currents.push(current);
+                    }
+                }
+            });
             
-            if (!isNaN(wavelength) && !isNaN(voltage) && wavelength > 0) {
-                data.push({
-                    color: color,
-                    wavelength: wavelength,
-                    voltage: voltage,
-                    reciprocalWavelength: 1 / wavelength
-                });
+            // Check if we have enough data points
+            if (voltages.length < 2) {
+                alert("Please enter valid data for at least two readings to plot the graph.");
+                return;
             }
-        }
-    });
-    
-    // Debug: Log collected data
-    console.log("Collected data:", data);
-    
-    // Check if we have enough data points
-    if (data.length < 2) {
-        alert("Please enter valid data for at least two different LEDs to plot the graph.");
-        return;
-    }
-
-    
-    // Sort by wavelength
-    data.sort((a, b) => a.wavelength - b.wavelength);
-    
-    // Prepare data for Chart.js
-    const reciprocalWavelengths = data.map(item => item.reciprocalWavelength);
-    const voltages = data.map(item => item.voltage);
-    
-    // Calculate slope and Planck's constant
-    const slope = calculateSlope(reciprocalWavelengths, voltages);
-    const planckConstant = slope * (1.602e-19) / (2.998e8);
-
- // Convert to J·s
-    const acceptedPlanck = 6.626e-34;
-    const percentError = Math.abs((planckConstant - acceptedPlanck) / acceptedPlanck) * 100;
-    
-    // Update results display
-    document.getElementById('slope-value').textContent = slope.toExponential(4);
-    document.getElementById('planck-value').textContent = planckConstant.toExponential(4) + " J·s";
-    document.getElementById('error-value').textContent = percentError.toFixed(2) + "%";
-    
-    // Create or update graph
-    const ctx = document.getElementById('resultsGraph').getContext('2d');
-    
-    if (resultsGraph) {
-        resultsGraph.destroy();
-    }
-    
-    // Define color mapping
-    const colorMap = {
-        'Red': '#ff3c3c',
-        'Orange': '#ff8c3c',
-        'Yellow': '#ffd43c',
-        'Green': '#4caf50',
-        'Blue': '#2196f3'
-    };
-    
-    resultsGraph = new Chart(ctx, {
-        type: 'scatter',
-        data: {
-            datasets: [{
-                label: 'Experimental Data',
-                data: data.map(item => ({
-                    x: item.reciprocalWavelength,
-                    y: item.voltage,
-                    color: item.color
-                })),
-                backgroundColor: data.map(item => colorMap[item.color] || '#4361ee'),
-                borderColor: 'rgba(0,0,0,0.5)',
-                borderWidth: 1,
-                pointRadius: 8,
-                pointHoverRadius: 10
-            }, {
-                label: 'Linear Fit',
-                data: [
-                    {x: Math.min(...reciprocalWavelengths), y: slope * Math.min(...reciprocalWavelengths)},
-                    {x: Math.max(...reciprocalWavelengths), y: slope * Math.max(...reciprocalWavelengths)}
-                ],
+            
+            // Find threshold voltage (where current starts increasing rapidly)
+            let thresholdVoltage = null;
+            for (let i = 1; i < currents.length; i++) {
+                if (currents[i] > 0.1 && currents[i-1] <= 0.1) { // Threshold at 0.1mA
+                    thresholdVoltage = voltages[i];
+                    break;
+                }
+            }
+            
+            // Find typical operating point (around 10-20mA)
+            let operatingVoltage = null;
+            let operatingCurrent = null;
+            for (let i = 0; i < currents.length; i++) {
+                if (currents[i] >= 10 && currents[i] <= 20) {
+                    operatingVoltage = voltages[i];
+                    operatingCurrent = currents[i];
+                    break;
+                }
+            }
+            
+            // Update results display
+            document.getElementById('threshold-value').textContent = thresholdVoltage ? thresholdVoltage.toFixed(2) + " V" : "--";
+            document.getElementById('operating-value').textContent = operatingVoltage ? operatingVoltage.toFixed(2) + " V" : "--";
+            document.getElementById('current-value').textContent = operatingCurrent ? operatingCurrent.toFixed(2) + " mA" : "--";
+            
+            // Create or update graph
+            const ctx = document.getElementById('resultsGraph').getContext('2d');
+            
+            if (resultsGraph) {
+                resultsGraph.destroy();
+            }
+            
+            resultsGraph = new Chart(ctx, {
                 type: 'line',
-                borderColor: 'rgba(239, 35, 60, 0.8)',
-                borderWidth: 2,
-                fill: false,
-                pointRadius: 0
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false, // Changed to false for better mobile control
-            scales: {
-                x: {
-                    title: {
-                        display: true,
-                        text: '1/λ (nm⁻¹)',
-                        font: {
-                            weight: 'bold',
-                            size: window.innerWidth < 768 ? 12 : 14
-                        }
-                    },
-                    ticks: {
-                        font: {
-                            size: window.innerWidth < 768 ? 10 : 12
-                        }
-                    }
+                data: {
+                    labels: voltages.map(v => v.toFixed(2)),
+                    datasets: [{
+                        label: 'LED Current (mA)',
+                        data: currents,
+                        borderColor: '#4361ee',
+                        backgroundColor: 'rgba(67, 97, 238, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.4
+                    }]
                 },
-                y: {
-                    title: {
-                        display: true,
-                        text: 'Threshold Voltage (V)',
-                        font: {
-                            weight: 'bold',
-                            size: window.innerWidth < 768 ? 12 : 14
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Voltage (V)',
+                                font: {
+                                    weight: 'bold',
+                                    size: window.innerWidth < 768 ? 12 : 14
+                                }
+                            },
+                            ticks: {
+                                font: {
+                                    size: window.innerWidth < 768 ? 10 : 12
+                                }
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Current (mA)',
+                                font: {
+                                    weight: 'bold',
+                                    size: window.innerWidth < 768 ? 12 : 14
+                                }
+                            },
+                            ticks: {
+                                font: {
+                                    size: window.innerWidth < 768 ? 10 : 12
+                                }
+                            }
                         }
                     },
-                    ticks: {
-                        font: {
-                            size: window.innerWidth < 768 ? 10 : 12
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `Current: ${context.parsed.y.toFixed(2)} mA at ${context.parsed.x.toFixed(2)} V`;
+                                }
+                            }
+                        },
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    size: window.innerWidth < 768 ? 12 : 14
+                                }
+                            }
                         }
                     }
                 }
-            },
-            plugins: {
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            const point = context.raw;
-                            return `${point.color} LED: λ=${(1/point.x).toFixed(0)}nm, Vth=${point.y}V`;
-                        }
-                    }
-                },
-                legend: {
-                    position: 'top',
-                    labels: {
-                        font: {
-                            size: window.innerWidth < 768 ? 12 : 14
-                        }
-                    }
-                }
-            }
+            });
         }
-    });
-}
-function calculateSlope(x, y) {
-    const n = x.length;
-    let sumX = 0, sumY = 0, sumXY = 0, sumXX = 0;
-
-    for (let i = 0; i < n; i++) {
-        sumX += x[i];
-        sumY += y[i];
-        sumXY += x[i] * y[i];
-        sumXX += x[i] * x[i];
-    }
-
-    return (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
-}
 
         // Reset all readings
         function resetReadings() {
@@ -1188,9 +1184,9 @@ function calculateSlope(x, y) {
                 input.value = '';
             });
             
-            document.getElementById('slope-value').textContent = '--';
-            document.getElementById('planck-value').textContent = '--';
-            document.getElementById('error-value').textContent = '--';
+            document.getElementById('threshold-value').textContent = '--';
+            document.getElementById('operating-value').textContent = '--';
+            document.getElementById('current-value').textContent = '--';
             
             if (resultsGraph) {
                 resultsGraph.destroy();
@@ -1198,29 +1194,29 @@ function calculateSlope(x, y) {
             }
         }
 
-   function loadSampleData() {
-    const sampleData = [
-        { wavelength: 700, voltage: 1.8, current: 5.0 },
-        { wavelength: 620, voltage: 2.0, current: 5.2 },
-        { wavelength: 590, voltage: 2.1, current: 5.5 },
-        { wavelength: 550, voltage: 2.3, current: 6.0 },
-        { wavelength: 470, voltage: 2.8, current: 7.5 }
-    ];
-
-    const rows = document.querySelectorAll('.reading-table tbody tr');
-
-    sampleData.forEach((data, i) => {
-        const cells = rows[i].querySelectorAll('td');
-        if (cells[1] && cells[2] && cells[3]) {
-            cells[1].querySelector('input').value = data.wavelength;
-            cells[2].querySelector('input').value = data.voltage;
-            cells[3].querySelector('input').value = data.current;
+        function loadSampleData() {
+            // Sample data for LED characteristics
+            const sampleVoltages = [0, 0.5, 1.0, 1.5, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3];
+            const sampleCurrents = [0, 0, 0, 0.1, 0.5, 2.0, 5.0, 10.0, 20.0, 35.0];
+            
+            const rows = document.querySelectorAll('.reading-table tbody tr');
+            
+            rows.forEach((row, i) => {
+                const voltageInput = row.querySelector('td:nth-child(2) input');
+                const currentInput = row.querySelector('td:nth-child(3) input');
+                
+                if (voltageInput && currentInput && i < sampleVoltages.length) {
+                    voltageInput.value = sampleVoltages[i];
+                    currentInput.value = sampleCurrents[i];
+                }
+            });
+            
+            // Set least counts
+            document.querySelectorAll('.reading-input')[0].value = '0.1';
+            document.querySelectorAll('.reading-input')[1].value = '1';
+            
+            setTimeout(plotGraph, 500);
         }
-    });
-
-    setTimeout(plotGraph, 500);
-}
-
 
         // Set current year in footer
         document.getElementById('current-year').textContent = new Date().getFullYear();
@@ -1232,31 +1228,8 @@ function calculateSlope(x, y) {
             item.classList.add('floating');
         });
 
-        // Add color coding to LED rows
-        function colorCodeRows() {
-            const rows = document.querySelectorAll('.reading-table tbody tr');
-            const colors = {
-                'Red': '#ff3c3c',
-                'Orange': '#ff8c3c',
-                'Yellow': '#ffd43c',
-                'Green': '#4caf50',
-                'Blue': '#2196f3'
-            };
-            
-            rows.forEach(row => {
-                const colorName = row.cells[0].textContent.trim();
-                if (colors[colorName]) {
-                    row.style.backgroundColor = `${colors[colorName]}15`;
-                    row.cells[0].style.color = colors[colorName];
-                    row.cells[0].style.fontWeight = 'bold';
-                }
-            });
-        }
-
         // Initialize on DOM load
         document.addEventListener('DOMContentLoaded', function() {
-            colorCodeRows();
-            
             // Add event listeners to inputs for real-time updates
             const inputs = document.querySelectorAll('.reading-input');
             inputs.forEach(input => {
@@ -1266,7 +1239,6 @@ function calculateSlope(x, y) {
                     }
                 });
             });
-              loadSampleData();
         });
     </script>
 </body>
