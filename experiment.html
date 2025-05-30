@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics Lab | Planck's Constant Experiment</title>
+    <meta name="description" content="Interactive experiment for determining Planck's constant using LEDs">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4cc9f0;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --success: #4bb543;
+            --warning: #fca311;
+            --danger: #ef233c;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7ff;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background-color: var(--dark);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links li a:hover::after,
+        .nav-links li a.active::after {
+            width: 100%;
+        }
+        
+        .hamburger {
+            display: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--dark), var(--secondary));
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
+            opacity: 0.2;
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+        }
+        
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--dark);
+        }
+        
+        .btn-primary:hover {
+            background-color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-outline {
+            border: 2px solid white;
+            color: white;
+        }
+        
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+        
+        /* Cards */
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .section-header i {
+            font-size: 28px;
+            margin-right: 15px;
+            color: var(--primary);
+        }
+        
+        .section-header h2 {
+            font-size: 1.8rem;
+            color: var(--dark);
+        }
+        
+        /* Experiment Sections */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .apparatus-item {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .apparatus-item i {
+            font-size: 24px;
+            color: var(--primary);
+        }
+        
+        /* Tables */
+        .reading-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            overflow-x: auto;
+            display: block;
+        }
+        
+        .reading-table th, .reading-table td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+            min-width: 100px;
+        }
+        
+        .reading-table th {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 500;
+        }
+        
+        .reading-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .reading-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .reading-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+        
+        /* Graph Section */
+        .graph-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .graph-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .graph-wrapper {
+            position: relative;
+            width: 100%;
+            margin: 20px 0;
+        }
+        
+        .graph-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-plot {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        .btn-reset {
+            background-color: var(--danger);
+            color: white;
+        }
+        
+        .btn-sample {
+            background-color: var(--warning);
+            color: white;
+        }
+        
+        /* Results */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .result-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .result-icon {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(67, 97, 238, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 20px;
+        }
+        
+        .result-content h4 {
+            margin-bottom: 5px;
+            font-size: 16px;
+            color: #555;
+        }
+        
+        .result-content p {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            color: var(--accent);
+            font-size: 20px;
+        }
+        
+        .footer-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-section ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-section ul li a:hover {
+            color: var(--accent);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 20px;
+            transition: color 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: var(--accent);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background-color: var(--dark);
+                position: absolute;
+                top: 70px;
+                right: 0;
+                width: 250px;
+                padding: 20px;
+                border-radius: 0 0 0 10px;
+                box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.2);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .graph-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .graph-controls .btn {
+                width: 100%;
+                max-width: 250px;
+                margin-bottom: 10px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .reading-table th, .reading-table td {
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                padding: 80px 20px;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .section-header i {
+                font-size: 24px;
+            }
+
+            .reading-table {
+                font-size: 12px;
+            }
+
+            .reading-input {
+                padding: 8px;
+                font-size: 12px;
+            }
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        
+        .tab-btn {
+            padding: 10px 20px;
+            background-color: #f8f9fa;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Accordion */
+        .accordion-item {
+            margin-bottom: 10px;
+        }
+        
+        .accordion-btn {
+            width: 100%;
+            padding: 15px 20px;
+            text-align: left;
+            background-color: #f8f9fa;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .accordion-btn:hover {
+            background-color: #e9ecef;
+        }
+        
+        .accordion-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .accordion-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .accordion-content.active {
+            padding: 15px;
+            max-height: 500px;
+            background-color: white;
+            border: 1px solid #eee;
+            border-top: none;
+        }
+        
+        /* Circuit Diagram */
+        .circuit-diagram {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .circuit-diagram img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .caption {
+            font-style: italic;
+            color: #666;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        
+        /* Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Graph canvas container */
+        .graph-canvas-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+        }
+
+        @media (max-width: 768px) {
+            .graph-canvas-container {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .graph-canvas-container {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">Physics<span>Lab</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Submission</a></li>
+                <li><a href="experiment.html" class="active">Experiment</a></li>
+                <li><a href="#theory">Theory</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content container">
+            <h1 data-aos="fade-up">Planck's Constant Experiment</h1>
+            <p data-aos="fade-up" data-aos-delay="100">Determining Planck's constant using LEDs of different colors</p>
+            <div data-aos="fade-up" data-aos-delay="200">
+                <a href="#experiment" class="btn btn-primary"><i class="fas fa-flask"></i> Start Experiment</a>
+                <a href="#theory" class="btn btn-outline"><i class="fas fa-book"></i> Learn Theory</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Objective Section -->
+        <section id="objective" class="card" data-aos="fade-up">
+            <div class="section-header">
+                <i class="fas fa-bullseye"></i>
+                <h2>Objective</h2>
+            </div>
+            <p>To determine Planck's constant by measuring the threshold voltage of LEDs of different colors and analyzing the relationship between voltage and wavelength.</p>
+        </section>
+
+        <!-- Apparatus Section -->
+        <section id="apparatus" class="card" data-aos="fade-up">
+            <div class="section-header">
+                <i class="fas fa-tools"></i>
+                <h2>Apparatus Required</h2>
+            </div>
+            <div class="grid-container">
+                <div class="apparatus-item" data-aos="zoom-in" data-aos-delay="100">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>LEDs of different colors</h3>
+                </div>
+                <div class="apparatus-item" data-aos="zoom-in" data-aos-delay="200">
+                    <i class="fas fa-bolt"></i>
+                    <h3>DC Power Supply</h3>
+                </div>
+                <div class="apparatus-item" data-aos="zoom-in" data-aos-delay="300">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <h3>Voltmeter (0-20V)</h3>
+                </div>
+                <div class="apparatus-item" data-aos="zoom-in" data-aos-delay="400">
+                    <i class="fas fa-microchip"></i>
+                    <h3>Ammeter (0-200mA)</h3>
+                </div>
+                <div class="apparatus-item" data-aos="zoom-in" data-aos-delay="500">
+                    <i class="fas fa-plug"></i>
+                    <h3>Connecting Wires</h3>
+                </div>
+                <div class="apparatus-item" data-aos="zoom-in" data-aos-delay="600">
+                    <i class="fas fa-box"></i>
+                    <h3>Planck's Constant Setup</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- Theory Section -->
+        <section id="theory" class="card" data-aos="fade-up">
+            <div class="section-header">
+                <i class="fas fa-book"></i>
+                <h2>Theory</h2>
+            </div>
+            <div class="theory-content">
+                <p>Planck's constant (h) is a fundamental physical constant that relates the energy of a photon to its frequency. The energy (E) of a photon is given by:</p>
+                <p style="text-align: center; font-size: 1.2rem; margin: 15px 0;">E = hν = hc/λ</p>
+                <p>where ν is the frequency, c is the speed of light, and λ is the wavelength of the photon.</p>
+                <p>In an LED, when electrons recombine with holes across the band gap, they emit photons with energy approximately equal to the band gap energy (Eg). The threshold voltage (Vth) at which an LED starts emitting light is related to the band gap energy by:</p>
+                <p style="text-align: center; font-size: 1.2rem; margin: 15px 0;">Eg ≈ eVth</p>
+                <p>where e is the electronic charge. Combining these equations, we get:</p>
+                <p style="text-align: center; font-size: 1.2rem; margin: 15px 0;">eVth ≈ hc/λ</p>
+                <p>By measuring the threshold voltage for LEDs of different wavelengths, we can determine Planck's constant from the slope of a plot of Vth versus 1/λ.</p>
+            </div>
+        </section>
+
+        <!-- Circuit Diagram -->
+        <section class="card" data-aos="fade-up">
+            <div class="section-header">
+                <i class="fas fa-project-diagram"></i>
+                <h2>Circuit Diagram</h2>
+            </div>
+            <div class="circuit-diagram">
+                <img src="https://www.researchgate.net/publication/334386878/figure/fig1/AS:779951922012160@1562869323800/Schematic-diagram-of-the-LED-circuit.png" alt="LED Circuit Diagram">
+                <p class="caption">Fig 1: Circuit diagram for Planck's constant experiment using LED</p>
+            </div>
+        </section>
+
+        <!-- Procedure Section -->
+        <section id="procedure" class="card" data-aos="fade-up">
+            <div class="section-header">
+                <i class="fas fa-clipboard-list"></i>
+                <h2>Procedure</h2>
+            </div>
+            <ol class="procedure-steps">
+                <li>Set up the circuit as shown in the diagram, connecting the power supply, voltmeter, ammeter, and LED.</li>
+                <li>Start with the red LED and set the voltmeter to the 20V range and ammeter to the 200mA range.</li>
+                <li>Switch on the power supply and gradually increase the voltage in steps of 0.1V.</li>
+                <li>Observe the ammeter reading. When the LED just starts to glow, note the voltage (threshold voltage).</li>
+                <li>Record the corresponding current reading.</li>
+                <li>Repeat the procedure for LEDs of different colors (blue, green, yellow, orange).</li>
+                <li>Tabulate the readings of threshold voltage versus wavelength for each LED.</li>
+                <li>Plot a graph of threshold voltage (Vth) versus the reciprocal of wavelength (1/λ).</li>
+                <li>Determine Planck's constant from the slope of the graph using the relation h = (slope × e)/c.</li>
+            </ol>
+        </section>
+
+        <!-- Observations Section -->
+        <section id="observations" class="card" data-aos="fade-up">
+            <div class="section-header">
+                <i class="fas fa-table"></i>
+                <h2>Observations</h2>
+            </div>
+            
+            <table class="reading-table">
+                <thead>
+                    <tr>
+                        <th>Color</th>
+                        <th>Wavelength (nm)</th>
+                        <th>Threshold Voltage (V)</th>
+                        <th>Current (mA)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Red</td>
+                        <td><input type="number" class="reading-input" placeholder="700"></td>
+                        <td><input type="number" step="0.01" class="reading-input" placeholder="1.8"></td>
+                        <td><input type="number" step="0.01" class="reading-input" placeholder="5.0"></td>
+                    </tr>
+                    <tr>
+                        <td>Orange</td>
+                        <td><input type="number" class="reading-input" placeholder="620"></td>
+                        <td><input type="number" step="0.01" class="reading-input" placeholder="2.0"></td>
+                        <td><input type="number" step="0.01" class="reading-input" placeholder="5.2"></td>
+                    </tr>
+                    <tr>
+                        <td>Yellow</td>
+                        <td><input type="number" class="reading-input" placeholder="590"></td>
+                        <td><input type="number" step="0.01" class="reading-input" placeholder="2.1"></td>
+                        <td><input type="number" step="0.01" class="reading-input" placeholder="5.5"></td>
+                    </tr>
+                    <tr>
+                        <td>Green</td>
+                        <td><input type="number" class="reading-input" placeholder="550"></td>
+                        <td><input type="number" step="0.01" class="reading-input" placeholder="2.3"></td>
+                        <td><input type="number" step="0.01" class="reading-input" placeholder="6.0"></td>
+                    </tr>
+                    <tr>
+                        <td>Blue</td>
+                        <td><input type="number" class="reading-input" placeholder="470"></td>
+                        <td><input type="number" step="0.01" class="reading-input" placeholder="2.8"></td>
+                        <td><input type="number" step="0.01" class="reading-input" placeholder="7.5"></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="graph-controls">
+                <button class="btn btn-plot" onclick="plotGraph()"><i class="fas fa-chart-line"></i> Plot Graph</button>
+                <button class="btn btn-reset" onclick="resetReadings()"><i class="fas fa-redo"></i> Reset</button>
+                <button class="btn btn-sample" onclick="loadSampleData()"><i class="fas fa-vial"></i> Load Sample Data</button>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results" class="card" data-aos="fade-up">
+            <div class="section-header">
+                <i class="fas fa-chart-line"></i>
+                <h2>Results & Graph</h2>
+            </div>
+            
+            <div class="graph-container">
+                <div class="graph-card">
+                    <h3>Vth vs 1/λ Plot</h3>
+                    <div class="graph-wrapper">
+                        <div class="graph-canvas-container">
+                            <canvas id="resultsGraph"></canvas>
+                        </div>
+                    </div>
+                    <p class="caption">Fig 2: Graph of threshold voltage versus reciprocal of wavelength for determination of Planck's constant</p>
+                </div>
+            </div>
+            
+            <div class="results-grid">
+                <div class="result-card" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="result-icon">
+                        <i class="fas fa-ruler"></i>
+                    </div>
+                    <div class="result-content">
+                        <h4>Slope of Graph</h4>
+                        <p id="slope-value">--</p>
+                    </div>
+                </div>
+                <div class="result-card" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="result-icon">
+                        <i class="fas fa-atom"></i>
+                    </div>
+                    <div class="result-content">
+                        <h4>Planck's Constant</h4>
+                        <p id="planck-value">--</p>
+                    </div>
+                </div>
+                <div class="result-card" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="result-icon">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <div class="result-content">
+                        <h4>Percentage Error</h4>
+                        <p id="error-value">--</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Precautions Section -->
+        <section id="precautions" class="card" data-aos="fade-up">
+            <div class="section-header">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h2>Precautions</h2>
+            </div>
+            <ul class="precaution-list">
+                <li><i class="fas fa-check-circle"></i> Ensure all connections are tight and correct before switching on the power supply.</li>
+                <li><i class="fas fa-check-circle"></i> Increase the voltage very slowly near the threshold voltage to get an accurate reading.</li>
+                <li><i class="fas fa-check-circle"></i> Do not exceed the maximum current rating of the LEDs to prevent damage.</li>
+                <li><i class="fas fa-check-circle"></i> Take readings in a dimly lit room to clearly observe when the LED starts glowing.</li>
+                <li><i class="fas fa-check-circle"></i> Use fresh batteries or a stable power supply to ensure consistent voltage readings.</li>
+            </ul>
+        </section>
+
+        <!-- Viva Questions -->
+        <section id="viva" class="card" data-aos="fade-up">
+            <div class="section-header">
+                <i class="fas fa-question-circle"></i>
+                <h2>Viva Questions</h2>
+            </div>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-btn">What is the significance of Planck's constant?<i class="fas fa-chevron-down"></i></button>
+                    <div class="accordion-content">
+                        <p>Planck's constant is a fundamental constant in quantum mechanics that relates the energy of a photon to its frequency. It sets the scale of quantum effects and appears in many fundamental equations of quantum theory.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <button class="accordion-btn">Why do different colored LEDs have different threshold voltages?<i class="fas fa-chevron-down"></i></button>
+                    <div class="accordion-content">
+                        <p>Different colored LEDs emit light of different wavelengths, which corresponds to different photon energies. The threshold voltage is directly related to the energy band gap of the semiconductor material used in the LED, which determines the color of light emitted.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <button class="accordion-btn">What are the sources of error in this experiment?<i class="fas fa-chevron-down"></i></button>
+                    <div class="accordion-content">
+                        <p>Possible sources of error include:</p>
+                        <ul>
+                            <li>Difficulty in precisely determining the exact threshold voltage when the LED just starts glowing</li>
+                            <li>Variation in LED characteristics due to manufacturing tolerances</li>
+                            <li>Temperature dependence of the LED characteristics</li>
+                            <li>Instrumental errors in voltage and current measurements</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>PhysicsLab</h3>
+                    <p>Interactive physics experiments designed to enhance understanding of fundamental concepts through practical exploration.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="experiment.html">Experiment</a></li>
+                        <li><a href="#theory">Theory</a></li>
+                        <li><a href="#viva">Viva Questions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Team Members</h3>
+                    <ul>
+                        <li>Muskan Sultaniya</li>
+                        <li>Jane Smith</li>
+                        <li>Robert Johnson</li>
+                        <li>Emily Davis</li>
+                        <li>hello giraffe</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Submitted to: Prof. Irfan Mansuri</p>
+                <p>Indore Institute of Science and Technology</p>
+                <p>&copy; <span id="current-year"></span> PhysicsLab. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        // Initialize AOS animation
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // Mobile navigation toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links li a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+
+        // Accordion functionality
+        const accordionBtns = document.querySelectorAll('.accordion-btn');
+        
+        accordionBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.classList.toggle('active');
+                const content = btn.nextElementSibling;
+                
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                }
+            });
+        });
+
+        // Graph variables
+        let resultsGraph;
+
+        function plotGraph() {
+            // Get data from table
+            const table = document.querySelector('.reading-table');
+            const rows = table.querySelectorAll('tbody tr');
+            const data = [];
+            
+            // Collect valid data points
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                const color = cells[0].textContent.trim();
+                const wavelengthInput = cells[1].querySelector('input');
+                const voltageInput = cells[2].querySelector('input');
+                
+                if (wavelengthInput && voltageInput) {
+            const wavelength = parseFloat(wavelengthInput.value);
+            const voltage = parseFloat(voltageInput.value);
+            
+            if (!isNaN(wavelength) && !isNaN(voltage) && wavelength > 0) {
+                data.push({
+                    color: color,
+                    wavelength: wavelength,
+                    voltage: voltage,
+                    reciprocalWavelength: 1 / wavelength
+                });
+            }
+        }
+    });
+    
+    // Debug: Log collected data
+    console.log("Collected data:", data);
+    
+    // Check if we have enough data points
+    if (data.length < 2) {
+        alert("Please enter valid data for at least two different LEDs to plot the graph.");
+        return;
+    }
+
+    
+    // Sort by wavelength
+    data.sort((a, b) => a.wavelength - b.wavelength);
+    
+    // Prepare data for Chart.js
+    const reciprocalWavelengths = data.map(item => item.reciprocalWavelength);
+    const voltages = data.map(item => item.voltage);
+    
+    // Calculate slope and Planck's constant
+    const slope = calculateSlope(reciprocalWavelengths, voltages);
+    const planckConstant = slope * (1.602e-19) / (2.998e8);
+
+ // Convert to J·s
+    const acceptedPlanck = 6.626e-34;
+    const percentError = Math.abs((planckConstant - acceptedPlanck) / acceptedPlanck) * 100;
+    
+    // Update results display
+    document.getElementById('slope-value').textContent = slope.toExponential(4);
+    document.getElementById('planck-value').textContent = planckConstant.toExponential(4) + " J·s";
+    document.getElementById('error-value').textContent = percentError.toFixed(2) + "%";
+    
+    // Create or update graph
+    const ctx = document.getElementById('resultsGraph').getContext('2d');
+    
+    if (resultsGraph) {
+        resultsGraph.destroy();
+    }
+    
+    // Define color mapping
+    const colorMap = {
+        'Red': '#ff3c3c',
+        'Orange': '#ff8c3c',
+        'Yellow': '#ffd43c',
+        'Green': '#4caf50',
+        'Blue': '#2196f3'
+    };
+    
+    resultsGraph = new Chart(ctx, {
+        type: 'scatter',
+        data: {
+            datasets: [{
+                label: 'Experimental Data',
+                data: data.map(item => ({
+                    x: item.reciprocalWavelength,
+                    y: item.voltage,
+                    color: item.color
+                })),
+                backgroundColor: data.map(item => colorMap[item.color] || '#4361ee'),
+                borderColor: 'rgba(0,0,0,0.5)',
+                borderWidth: 1,
+                pointRadius: 8,
+                pointHoverRadius: 10
+            }, {
+                label: 'Linear Fit',
+                data: [
+                    {x: Math.min(...reciprocalWavelengths), y: slope * Math.min(...reciprocalWavelengths)},
+                    {x: Math.max(...reciprocalWavelengths), y: slope * Math.max(...reciprocalWavelengths)}
+                ],
+                type: 'line',
+                borderColor: 'rgba(239, 35, 60, 0.8)',
+                borderWidth: 2,
+                fill: false,
+                pointRadius: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false, // Changed to false for better mobile control
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: '1/λ (nm⁻¹)',
+                        font: {
+                            weight: 'bold',
+                            size: window.innerWidth < 768 ? 12 : 14
+                        }
+                    },
+                    ticks: {
+                        font: {
+                            size: window.innerWidth < 768 ? 10 : 12
+                        }
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Threshold Voltage (V)',
+                        font: {
+                            weight: 'bold',
+                            size: window.innerWidth < 768 ? 12 : 14
+                        }
+                    },
+                    ticks: {
+                        font: {
+                            size: window.innerWidth < 768 ? 10 : 12
+                        }
+                    }
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const point = context.raw;
+                            return `${point.color} LED: λ=${(1/point.x).toFixed(0)}nm, Vth=${point.y}V`;
+                        }
+                    }
+                },
+                legend: {
+                    position: 'top',
+                    labels: {
+                        font: {
+                            size: window.innerWidth < 768 ? 12 : 14
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+function calculateSlope(x, y) {
+    const n = x.length;
+    let sumX = 0, sumY = 0, sumXY = 0, sumXX = 0;
+
+    for (let i = 0; i < n; i++) {
+        sumX += x[i];
+        sumY += y[i];
+        sumXY += x[i] * y[i];
+        sumXX += x[i] * x[i];
+    }
+
+    return (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
+}
+
+        // Reset all readings
+        function resetReadings() {
+            const inputs = document.querySelectorAll('.reading-input');
+            inputs.forEach(input => {
+                input.value = '';
+            });
+            
+            document.getElementById('slope-value').textContent = '--';
+            document.getElementById('planck-value').textContent = '--';
+            document.getElementById('error-value').textContent = '--';
+            
+            if (resultsGraph) {
+                resultsGraph.destroy();
+                resultsGraph = null;
+            }
+        }
+
+   function loadSampleData() {
+    const sampleData = [
+        { wavelength: 700, voltage: 1.8, current: 5.0 },
+        { wavelength: 620, voltage: 2.0, current: 5.2 },
+        { wavelength: 590, voltage: 2.1, current: 5.5 },
+        { wavelength: 550, voltage: 2.3, current: 6.0 },
+        { wavelength: 470, voltage: 2.8, current: 7.5 }
+    ];
+
+    const rows = document.querySelectorAll('.reading-table tbody tr');
+
+    sampleData.forEach((data, i) => {
+        const cells = rows[i].querySelectorAll('td');
+        if (cells[1] && cells[2] && cells[3]) {
+            cells[1].querySelector('input').value = data.wavelength;
+            cells[2].querySelector('input').value = data.voltage;
+            cells[3].querySelector('input').value = data.current;
+        }
+    });
+
+    setTimeout(plotGraph, 500);
+}
+
+
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Add floating animation to apparatus items
+        const apparatusItems = document.querySelectorAll('.apparatus-item');
+        apparatusItems.forEach((item, index) => {
+            item.style.animationDelay = `${index * 0.2}s`;
+            item.classList.add('floating');
+        });
+
+        // Add color coding to LED rows
+        function colorCodeRows() {
+            const rows = document.querySelectorAll('.reading-table tbody tr');
+            const colors = {
+                'Red': '#ff3c3c',
+                'Orange': '#ff8c3c',
+                'Yellow': '#ffd43c',
+                'Green': '#4caf50',
+                'Blue': '#2196f3'
+            };
+            
+            rows.forEach(row => {
+                const colorName = row.cells[0].textContent.trim();
+                if (colors[colorName]) {
+                    row.style.backgroundColor = `${colors[colorName]}15`;
+                    row.cells[0].style.color = colors[colorName];
+                    row.cells[0].style.fontWeight = 'bold';
+                }
+            });
+        }
+
+        // Initialize on DOM load
+        document.addEventListener('DOMContentLoaded', function() {
+            colorCodeRows();
+            
+            // Add event listeners to inputs for real-time updates
+            const inputs = document.querySelectorAll('.reading-input');
+            inputs.forEach(input => {
+                input.addEventListener('change', function() {
+                    if (resultsGraph) {
+                        plotGraph();
+                    }
+                });
+            });
+              loadSampleData();
+        });
+    </script>
+</body>
+</html>
